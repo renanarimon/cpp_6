@@ -12,14 +12,9 @@ namespace ariel{
         : _home(home), _out(out) {}
         ~Game(){}
 
-        static int randNum(int A, int B){
-            int r = (rand()%(B-A)) + A;
-            return r;
-        }
-
         Team* startGame(){
-            int homeRand = randNum(55,100);
-            int awayRand = randNum(50,100);
+            int homeRand = (rand()%(100-55)) + 55;
+            int awayRand = (rand()%(100-50)) + 50;
             homeRand += (int)(this->_home->_talent_level * 10);
             awayRand += (int)(this->_out->_talent_level * 10);
             this->_home->_scorePts+=(homeRand);
@@ -60,7 +55,5 @@ namespace ariel{
             return this->_out;
         }
     };
-
-    
     
 }

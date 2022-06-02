@@ -1,17 +1,17 @@
 #include "Leauge.hpp"
 
 namespace ariel{
-    void Leauge::startLeauge(){
+    void Leauge::start(){
         Schedule* schedule = new Schedule(this->_teams);
         for (auto iter = schedule->_games.begin(); iter < schedule->_games.end(); iter++) {
             (*iter)->startGame();
         }
         this->_end_of_leauge = true;
-        fixLeauge();
+        update();
 
     }
 
-    void Leauge::fixLeauge(){
+    void Leauge::update(){
         if (!this->_end_of_leauge){
             throw std::invalid_argument("leauge not started yet\n");
         }
@@ -26,15 +26,17 @@ namespace ariel{
             }
         }
     }
-    void Leauge::printLeauge(int limit){
+    void Leauge::print(int limit){
         if (!this->_end_of_leauge){
             throw std::invalid_argument("leauge not started yet\n");
         }
-        std::cout << "---------Leauge Rank---------" << std::endl;
+        std::cout << "\n---------Leauge Rank---------" << std::endl;
+
         for (unsigned int i = 0; i < limit; ++i) {
-            std::cout << i+1 << ") " << this->_teams.at(i)->_name << " Wins-Loses: " << this->_teams.at(i)->_wins
-                      << "-" << this->_teams.at(i)->_losses << ". Score-Suffer: " << this->_teams.at(i)->_scorePts << "-"
-                      << this->_teams.at(i)->_sufferedPts << ". TOTAL SCORE: " << this->_teams.at(i)->_score << std::endl;
+            std::cout << "\n" << std::endl;
+            std::cout << i+1 << ". " << this->_teams.at(i)->_name << "\n Wins-Loses: " << this->_teams.at(i)->_wins
+                      << "-" << this->_teams.at(i)->_losses << ".\nScore-Suffer: " << this->_teams.at(i)->_scorePts << "-"
+                      << this->_teams.at(i)->_sufferedPts << ".\nTOTAL SCORE: " << this->_teams.at(i)->_score << std::endl;
         }
         int maxWINS = 0;
         Team* maxWin;
@@ -50,9 +52,7 @@ namespace ariel{
                 maxLose = *iter;
             }
         }
-        std::cout << "Most wins spree by " << maxWin->_name << " with: " << maxWINS << " spree wins!" << std::endl;
-        std::cout << "Most loses spree by " << maxLose->_name << " with: " << maxLOSES << " spree loses!" << std::endl;
-        std::cout << "Teams that scored more than they suffered:" << std::endl;
+
         for (auto iter = this->_teams.begin(); iter < this->_teams.end(); iter++) {
             if((*iter)->_scorePts - (*iter)->_sufferedPts > 0){
                 std::cout << (*iter)->_name << " with: " <<(*iter)->_scorePts << ":" <<(*iter)->_sufferedPts << std::endl;

@@ -37,7 +37,7 @@ TEST_CASE("LEAUGE"){
     CHECK_NOTHROW(allTeams.push_back(new Team("tal",0.123456)));
     Leauge* l = new Leauge(allTeams);
     CHECK_EQ(l->_teams.size(), 20);
-    CHECK_THROWS(l->printLeauge(5)); // Leauge not started
-    l->startLeauge();
-    CHECK_NOTHROW(l->printLeauge(5));
+    CHECK_THROWS(l->print(5)); // Leauge not started
+    l->start();
+    CHECK_NOTHROW(l->print(5));
 }

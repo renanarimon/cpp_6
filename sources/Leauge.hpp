@@ -44,11 +44,11 @@ namespace ariel{
         ~Leauge(){}
 
 
-        void startLeauge();
+        void start();
 
-        void fixLeauge();
+        void update();
 
-        void printLeauge(int limit);
+        void print(int limit);
 
 
     };
